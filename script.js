@@ -40,6 +40,7 @@ function removeNumberFromGame(numberToRemove) {
         console.error('Número Inválido', numberToRemove);
         return;
     }
+    
 
     var newGame = [];
 
