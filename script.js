@@ -1,18 +1,19 @@
 var state = { board: [], currentGame: [], savedGames: [], };
 
 function start() {
-addNumberToGame(1);
-addNumberToGame(2);
-addNumberToGame(3);
-addNumberToGame(4);
-saveGame();
-addNumberToGame(5);
-addNumberToGame(60);
+/*addNumberToGame(1);addNumberToGame(2);addNumberToGame(3);addNumberToGame(4);saveGame();addNumberToGame(5);addNumberToGame(60);saveGame();resetGame();console.log(state.currentGame);console.log(state.savedGames);*/
 
-saveGame();
+createBoard();
 
-console.log(state.currentGame);
-console.log(state.savedGames);
+console.log(state.board);
+}
+
+function createBoard() {
+    state.board = [];
+
+    for (var i = 1; i <= 60; i++) {
+        state.board.push(i);
+    }
 }
 
 function addNumberToGame(numberToAdd) {
@@ -47,13 +48,13 @@ function removeNumberFromGame(numberToRemove) {
 
         if (currentNumber === numberToRemove) {
             continue; 
-        }
+        } // Função que valida número por número, se o número for igual a XXX...
 
-        newGame.push(currentNumber);
+        newGame.push(currentNumber); //... ele não irá passar pela validação.
     }
 
     state.currentGame = newGame;
-}
+} // Remover número de selção.
 
 function isNumberInGame(numberToCheck){
     return state.currentGame.includes(numberToCheck);
@@ -63,13 +64,16 @@ function saveGame() {
     if (!isGameComplete()) {
         console.error('O jogo não está completo!');
         return;
-    }
+    } // função para avisar ao usuário se o jogo está completo ou não.
 
-    state.savedGames.push(state.currentGame);
+    state.savedGames.push(state.currentGame); //caso o jogo estiver completo, ele irá levá-li ao savedGames.
 }
 
 function isGameComplete() {
     return state.currentGame.length === 6;
-}
+} // função para verificar se o jogo está completo.
 
+function resetGame() {
+    state.currentGame = [];
+} // resetar o jogo.
 start();
