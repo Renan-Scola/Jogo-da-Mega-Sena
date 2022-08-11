@@ -4,6 +4,7 @@ function start() {
 /*addNumberToGame(1);addNumberToGame(2);addNumberToGame(3);addNumberToGame(4);saveGame();addNumberToGame(5);addNumberToGame(60);saveGame();resetGame();console.log(state.currentGame);console.log(state.savedGames);*/
 
 createBoard();
+newGame();
 
 console.log(state.board);
 }
@@ -13,7 +14,34 @@ function createBoard() {
 
     for (var i = 1; i <= 60; i++) {
         state.board.push(i);
+    } // criando números de 1 a 60 no console.
+} //replicando a interface para o usuário.
+
+function newGame() {
+resetGame();
+render();
+}
+
+function render() {
+renderBoard();
+}
+
+function renderBoard() {
+    var divBoard = document.querySelector('#megasena-board');
+    divBoard.innerHTML = ''; //zerando a aplicação html
+
+    var ulNumbers = document.createElement('ul');
+
+    for (var i = 0; i < state.board.length; i++) {
+        var currentNumber = state.board[i];
+
+        var liNumber = document.createElement('li');
+        liNumber.textContent = currentNumber;
+
+        ulNumbers.appendChild(liNumber);
     }
+
+    divBoard.appendChild(ulNumbers);
 }
 
 function addNumberToGame(numberToAdd) {
