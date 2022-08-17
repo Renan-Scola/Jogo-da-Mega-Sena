@@ -20,10 +20,15 @@ function createBoard() {
 function newGame() {
 resetGame();
 render();
+
+
+console.log(state.currentGame);
 }
 
 function render() {
-renderBoard();
+    renderBoard();
+    renderButtons();
+    renderSavedGames();
 }
 
 function renderBoard() {
@@ -38,10 +43,28 @@ function renderBoard() {
         var liNumber = document.createElement('li');
         liNumber.textContent = currentNumber;
 
-        ulNumbers.appendChild(liNumber);
-    }
+        liNumber.addEventListener('click', handleNumberClick);
 
-    divBoard.appendChild(ulNumbers);
+        ulNumbers.appendChild(liNumber);
+    } // Looping criado com interação html do site, para expor os números que podem ser jogados.
+
+    divBoard.appendChild(ulNumbers); //push da aplicação para que ela seja visivel para o usuário.
+}
+
+function handleNumberClick(event) {
+    var value = Number(event.currentTarget.textContent);
+
+    if (isNumberInGame(value)) {
+        removeNumberFromGame(value);
+    } else {
+        addNumberToGame(value);
+    } // selecionar número para colocar in game, caso o mesmo já estar selecionado, remove-lo.
+
+    console.log(state.currentGame);
+}//retornar o número clicado.
+
+function renderSavedGames() {
+
 }
 
 function addNumberToGame(numberToAdd) {
@@ -61,6 +84,23 @@ function addNumberToGame(numberToAdd) {
     } //não aceita dois números iguais no mesmo jogo.(1)
 
     state.currentGame.push(numberToAdd);
+}
+
+function renderButtons() {
+    var divButtons = document.querySelector('#megasena-buttons');
+    divButtons.innerHTML = '';
+    var buttonNewGame = createNewGameButton();
+
+    divButtons.appendChild(buttonNewGame);
+}
+
+function createNewGameButton() {
+    var button = document.createElement('button');
+    button.textContent = 'Novo Jogo';
+
+    button.addEventListener('click', newGame);
+
+    return button;
 }
 
 function removeNumberFromGame(numberToRemove) {
