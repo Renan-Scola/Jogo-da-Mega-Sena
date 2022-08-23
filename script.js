@@ -89,10 +89,33 @@ function addNumberToGame(numberToAdd) {
 function renderButtons() {
     var divButtons = document.querySelector('#megasena-buttons');
     divButtons.innerHTML = '';
+    
     var buttonNewGame = createNewGameButton();
+    var buttonRandomGame = createRandomGameButton();
+    var buttonSaveGame = createSaveGameButton();
 
     divButtons.appendChild(buttonNewGame);
-}
+    divButtons.appendChild(buttonRandomGame);
+    divButtons.appendChild(buttonSaveGame);
+}//rederiza os botões save, new e random.
+
+function createSaveGameButton() {
+    var button = document.createElement('button');
+    button.textContent = 'Salvar Jogo';
+
+    button.addEventListener('click', saveGame);
+
+    return button;
+}//funcionalidade
+
+function createRandomGameButton() {
+    var button = document.createElement('button');
+    button.textContent = 'Jogo Aleatório';
+
+    button.addEventListener('click', randomGame);
+
+    return button;
+}//criando botão randomGame
 
 function createNewGameButton() {
     var button = document.createElement('button');
@@ -101,7 +124,7 @@ function createNewGameButton() {
     button.addEventListener('click', newGame);
 
     return button;
-}
+}// criando botão newGame
 
 function removeNumberFromGame(numberToRemove) {
     if (numberToRemove < 1 || numberToRemove > 60) {
@@ -135,7 +158,9 @@ function saveGame() {
         return;
     } // função para avisar ao usuário se o jogo está completo ou não.
 
-    state.savedGames.push(state.currentGame); //caso o jogo estiver completo, ele irá levá-li ao savedGames.
+    state.savedGames.push(state.currentGame); //caso o jogo estiver completo, ele irá levá-lo ao savedGames.
+
+    console.log(state.savedGames);
 }
 
 function isGameComplete() {
@@ -145,4 +170,16 @@ function isGameComplete() {
 function resetGame() {
     state.currentGame = [];
 } // resetar o jogo.
+
+function randomGame() {
+    resetGame();
+
+    while(!isGameComplete()) {
+    var randomNumber = Math.ceil(Math.random() * 60); //ceil == arrenda o número para cima. random == escolhe um número entre 0,00 e 1.
+    addNumberToGame(randomNumber);
+    }// laço de repetição. "enquento o jogo não estiver completo, adicione mais um número a ele."
+
+    console.log(state.currentGame);
+} //regras 
+
 start();
