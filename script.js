@@ -109,6 +109,7 @@ function renderButtons() {
 function createSaveGameButton() {
     var button = document.createElement('button');
     button.textContent = 'Salvar Jogo';
+    button.disabled = !isGameComplete();
 
     button.addEventListener('click', saveGame);
 
@@ -188,6 +189,7 @@ function randomGame() {
     }// laço de repetição. "enquento o jogo não estiver completo, adicione mais um número a ele."
 
     console.log(state.currentGame);
+    render();
 } //regras 
 
 start();
