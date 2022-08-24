@@ -47,6 +47,10 @@ function renderBoard() {
 
         liNumber.addEventListener('click', handleNumberClick);
 
+        if (isNumberInGame(currentNumber)){
+            liNumber.classList.add('selected-number');
+        }
+
         ulNumbers.appendChild(liNumber);
     } // Looping criado com interação html do site, para expor os números que podem ser jogados.
 
@@ -63,6 +67,7 @@ function handleNumberClick(event) {
     } // selecionar número para colocar in game, caso o mesmo já estar selecionado, remove-lo.
 
     console.log(state.currentGame);
+    render();
 }//retornar o número clicado.
 
 function renderSavedGames() {

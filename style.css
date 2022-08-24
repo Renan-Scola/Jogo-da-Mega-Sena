@@ -27,3 +27,7 @@ cursor: pointer;
     user-select: none;
     cursor: pointer;
 }
+
+.selected-number{
+    background-color: rgb(33, 146, 33);
+}
