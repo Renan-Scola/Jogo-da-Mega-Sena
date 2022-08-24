@@ -36,12 +36,14 @@ function renderBoard() {
     divBoard.innerHTML = ''; //zerando a aplicação html
 
     var ulNumbers = document.createElement('ul');
+    ulNumbers.classList.add('numbers');
 
     for (var i = 0; i < state.board.length; i++) {
         var currentNumber = state.board[i];
 
         var liNumber = document.createElement('li');
         liNumber.textContent = currentNumber;
+        liNumber.classList.add('number');
 
         liNumber.addEventListener('click', handleNumberClick);
 
@@ -159,6 +161,7 @@ function saveGame() {
     } // função para avisar ao usuário se o jogo está completo ou não.
 
     state.savedGames.push(state.currentGame); //caso o jogo estiver completo, ele irá levá-lo ao savedGames.
+    newGame();
 
     console.log(state.savedGames);
 }
