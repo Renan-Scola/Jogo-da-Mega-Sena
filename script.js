@@ -21,29 +21,29 @@ function newGame() {
 resetGame();
 render();
 
-
 console.log(state.currentGame);
-}
+} // puxa função resetGame e reder
 
 function render() {
     renderBoard();
     renderButtons();
     renderSavedGames();
-}
+} //Puxa função renderBoard, rederButtons, e RenderSavedGames.
+
 
 function renderBoard() {
     var divBoard = document.querySelector('#megasena-board');
     divBoard.innerHTML = ''; //zerando a aplicação html
 
     var ulNumbers = document.createElement('ul');
-    ulNumbers.classList.add('numbers');
+    ulNumbers.classList.add('numbers'); //atribuindo classes aos números gerados para customização do CSS
 
     for (var i = 0; i < state.board.length; i++) {
         var currentNumber = state.board[i];
 
         var liNumber = document.createElement('li');
         liNumber.textContent = currentNumber;
-        liNumber.classList.add('number');
+        liNumber.classList.add('number'); //atribuindo classes aos números gerados para customização do CSS
 
         liNumber.addEventListener('click', handleNumberClick);
 
@@ -55,7 +55,7 @@ function renderBoard() {
     } // Looping criado com interação html do site, para expor os números que podem ser jogados.
 
     divBoard.appendChild(ulNumbers); //push da aplicação para que ela seja visivel para o usuário.
-}
+} // renderizando e customizando o board.
 
 function handleNumberClick(event) {
     var value = Number(event.currentTarget.textContent);
@@ -71,8 +71,26 @@ function handleNumberClick(event) {
 }//retornar o número clicado.
 
 function renderSavedGames() {
+    var divSavedGames = document.querySelector('#megasena-saved-games');
+    divSavedGames.innerHTML = '';
 
-}
+    if (state.savedGames.length === 0) {
+        divSavedGames.innerHTML = '<p>Nenhum jogo salvo</p>'; //Se SavedGames estiver na possição 0, mostrar "nenhum jogo salvo".
+    } else{ 
+    var ulsavedGames = document.creaateElement('ul');
+
+    for (var i =0; i < state.savedGames.length; i++) { 
+        var currentGame = state.savedGames[i]; //se não, mostar o valor salvo do savedGames.
+
+    var liGame = document.createElement('li');
+    liGame.textContent= currentGame.join(', ');// adicionar ", " a cada array reebido.
+
+    ulsavedGames.appendChild(liGame);
+    }
+
+    divSavedGames.appendChild(ulsavedGames);
+    }
+    }//rederizar os jogos salvos.
 
 function addNumberToGame(numberToAdd) {
     if (numberToAdd < 1 || numberToAdd > 60) {
@@ -91,7 +109,7 @@ function addNumberToGame(numberToAdd) {
     } //não aceita dois números iguais no mesmo jogo.(1)
 
     state.currentGame.push(numberToAdd);
-}
+} // regras para aceitar um número ao jogo
 
 function renderButtons() {
     var divButtons = document.querySelector('#megasena-buttons');
@@ -170,7 +188,7 @@ function saveGame() {
     newGame();
 
     console.log(state.savedGames);
-}
+} // regras de aceitação para salvar o jogo.
 
 function isGameComplete() {
     return state.currentGame.length === 6;
